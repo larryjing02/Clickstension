@@ -11,23 +11,48 @@
     <style>
         html,
         body {
-            font-family: "Open Sans", sans-serif;
-            font-size: 14px;
-            margin: 0;
-            min-height: 180px;
-            padding: 0;
-            width: 384px;
+          font-family: "Open Sans", sans-serif;
+          font-size: 14px;
+          margin: auto;
+          text-align: center;
+          min-height: 180px;
+          padding: 0;
+          width: auto;
         }
         .logo-icon {
-            vertical-align: text-bottom;
-            height: 50px;
-            margin-right: 50px;
+          vertical-align: text-bottom;
+          height: 50px;
+          margin-top: 10px;
+          margin-left: 10px;
+          margin-right: 20px;
+        }
+        .button {
+          margin-left: auto;
+          margin-right: auto;
+        }
+        .myButton {
+          background-color: #399fff;
+          border: none;
+          color: white;
+          padding: 10px 25px;
+          text-align: center;
+          text-decoration: none;
+          display: inline-block;
+          font-size: 17px;
+          border-radius: 15%;
         }
     </style>
 
     <script src="popup.js"></script>
   </head>
-  <body>
-      <h1><img class="logo-icon" src="clickIcon128.png" />Clickstension: The quicker-clicker-upper!</h1>
+  <body> 
+    <h1>
+      <img class="logo-icon" src="clickIcon128.png"/>
+      Clickstension: Make your own shortcuts!
+    </h1>
+    <div class = "button">
+      <button class = "myButton" id="clickactivity">Click!</button>
+      <script src="popup.js"></script>
+    </div>
   </body>
 </html>

@@ -1,12 +1,14 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "name": "Clickstension",
     "description": "Helps click stuff on webpages!",
     "version": "1.0.0",
     "icons": { "128": "clickIcon128.png" },
-    "browser_action": {
+    "permissions": ["scripting"],
+    
+    "action": {
+      "default_title": "Click Me",
       "default_icon": "clickIcon.png",
       "default_popup": "popup.html"
-    },
-    "permissions": ["activeTab"]
+    }
   }
