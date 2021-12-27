@@ -21,7 +21,7 @@
         }
         .logo-icon {
           vertical-align: text-bottom;
-          height: 50px;
+          height: 45px;
           margin-top: 10px;
           margin-left: 10px;
           margin-right: 20px;
@@ -41,17 +41,24 @@
           margin-right: auto;
         }
         .siteList {
+          padding: 10px;
           background-color: #399fff;
+          font-size: 17px;
+          color: white;
+          text-align: left;
+          border-radius: 5%;
         }
     </style>
   </head>
   <body> 
     <h1>
       <img class="logo-icon" src="clickIcon128.png"/>
-      Clickstension: Keep track of your tabs!
+      Clickstension: Keep track of your time!
     </h1>
     <script src="popup.js"></script>
-    <button class = "clickMe" id="clickactivity">Check Activity</button>
-    <ol class = "siteList" id="timeList"></ol>
+    <!--
+      <button class = "clickMe" id="clickactivity">Check Activity</button>
+    -->
+    <table class = "siteList" id="timeList"></table>
   </body>
 </html>
