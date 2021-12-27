@@ -26,10 +26,6 @@
           margin-left: 10px;
           margin-right: 20px;
         }
-        .button {
-          margin-left: auto;
-          margin-right: auto;
-        }
         .clickMe {
           background-color: #399fff;
           border: none;
@@ -40,18 +36,18 @@
           display: inline-block;
           font-size: 17px;
           border-radius: 15%;
+
+          margin-left: auto;
+          margin-right: auto;
         }
     </style>
-
-    <script src="popup.js"></script>
   </head>
   <body> 
     <h1>
       <img class="logo-icon" src="clickIcon128.png"/>
       Clickstension: Keep track of your tabs!
     </h1>
-    <div class = "button">
-      <button class = "clickMe" id="clickactivity">Check Activity</button>
-    </div>
+    <script src="popup.js"></script>
+    <button class = "clickMe" id="clickactivity">Check Activity</button>
   </body>
 </html>
