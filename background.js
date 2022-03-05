@@ -1,12 +1,14 @@
 // Gets domain of currently active tab
 async function getCurrentDomain() {
-    let queryOptions = { active: true, currentWindow: true };
-    let [tab] = await chrome.tabs.query(queryOptions);
+    // console.log("Getting current domain");
+    var queryOptions = { active: true, currentWindow: true };
+    var [tab] = await chrome.tabs.query(queryOptions);
     if (tab != null) {
-        let url = new URL(tab.url);
+        const url = new URL(tab.url);
+
         return url.hostname;
     } else {
-        console.log("Error");
+        console.log("Error getting current domain.");
         return "error";
     }
 }
@@ -51,9 +53,11 @@ function setSession(curDomain) {
 async function updateStorage() {
     var prev = await getSession();
     var cur = await getCurrentDomain();
+    // console.log(cur);
+    // console.log(prev);
 
     // If cur != prev then we changed domains
-    if (cur != prev) {
+    if (cur != "error" && cur != prev) {
         console.log("Domain change detected: " + cur);
 
         var elapsed = await getElapsedTime();
@@ -80,11 +84,12 @@ async function updateStorage() {
             chrome.storage.local.set({"timeMap":map}, function(){});
             console.log(map);
         });
-        if (cur != "error") {
-            setSession(cur);
-        }
     } else {
         console.log("Event ignored");
+    }
+    // Update session if cur isn't in error
+    if (cur != "error") {
+        setSession(cur);
     }
 }
 
