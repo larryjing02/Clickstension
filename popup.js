@@ -110,7 +110,7 @@ window.onload = function() {
     //document.getElementById("clickactivity").addEventListener("click", testFunc);
     
     // Force update and populate time attributes
-    // forceUpdate();
+    forceUpdate();
 
     // Get time attributes from storage
     // chrome.storage.local.get("timeMap", (result) => {
