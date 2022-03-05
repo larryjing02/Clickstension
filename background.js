@@ -5,8 +5,11 @@ async function getCurrentDomain() {
     var [tab] = await chrome.tabs.query(queryOptions);
     if (tab != null) {
         const url = new URL(tab.url);
-
-        return url.hostname;
+        var host = url.hostname;
+        if (host.startsWith("www.")) host = host.substring(4)
+        if (!host.includes(".")) return "error";
+        setSession(host);
+        return host;
     } else {
         console.log("Error getting current domain.");
         return "error";
@@ -28,7 +31,7 @@ async function getSession() {
 
 // Gets elapsed time in seconds
 async function getElapsedTime() {
-    //console.log("Getting start time");
+    // console.log("Getting start time");
     var p = new Promise(function(resolve, reject) {
         chrome.storage.local.get("timeA", (result) => {
         var time = result.timeA != null ? result.timeA : Math.floor(performance.now());
@@ -51,16 +54,16 @@ function setSession(curDomain) {
 
 // On tab activity, updates stored times if necessary
 async function updateStorage() {
-    var prev = await getSession();
-    var cur = await getCurrentDomain();
-    // console.log(cur);
-    // console.log(prev);
+    const prev = await getSession();
+    const elapsed = await getElapsedTime();
+    const cur = await getCurrentDomain();
+    // console.log("Current: " + cur);
+    // console.log("Previous:" + prev);
 
     // If cur != prev then we changed domains
-    if (cur != "error" && cur != prev) {
-        console.log("Domain change detected: " + cur);
-
-        var elapsed = await getElapsedTime();
+    // if (cur != "error") {
+    if (cur != prev && cur != "error") {
+        console.log("Change detected: " + cur);
 
         // If elapsed time returns negative then new session just began
         // Thus, is necessary to use current performance.now() as time factor
@@ -87,26 +90,23 @@ async function updateStorage() {
     } else {
         console.log("Event ignored");
     }
-    // Update session if cur isn't in error
-    if (cur != "error") {
-        setSession(cur);
-    }
+    
 }
 
-chrome.tabs.onUpdated.addListener(function(activeInfo) {
-    console.log("Updated Detected");
-    updateStorage();
-});
+// chrome.tabs.onUpdated.addListener(function(activeInfo) {
+//     console.log("Updated Detected");
+//     updateStorage();
+// });
 
 chrome.tabs.onActivated.addListener(function(activeInfo) {
     console.log("Activation Detected");
     updateStorage();
 });
 
-chrome.windows.onFocusChanged.addListener(function(activeInfo) {
-    console.log("Activation Detected");
-    updateStorage();
-});
+// chrome.windows.onFocusChanged.addListener(function(activeInfo) {
+//     console.log("Activation Detected");
+//     updateStorage();
+// });
 
 // Modify functionality to account for when browser startup/shutdown, see details about active tab?
 
